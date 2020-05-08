@@ -23,6 +23,11 @@ jobs:
       - attach_workspace:
           at: .
       - run: pip install ansible boto boto3
+      - run: ansible all --list-hosts
+      - run : echo $HASH
+      - run : echo $ACCESS_KEY
+      - run : echo $SECRET_KEY
+      - run : echo $SESSION_TOKEN
       - run: ansible-playbook ./ansible/ec2deploy.yml --user ubuntu --key-file ~/.ssh/id_rsa_$HASH -e access_key=$ACCESS_KEY -e secret_key=$SECRET_KEY -e session_token=$SESSION_TOKEN
 
 workflows:
