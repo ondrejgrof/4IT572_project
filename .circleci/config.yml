@@ -23,7 +23,7 @@ jobs:
       - attach_workspace:
           at: .
       - run: pip install ansible boto boto3
-      - run: ansible-playbook ./ansible/ec2deploy.yml --user ubuntu --key-file ~/.ssh/id_rsa_6fb8a30c54f0c6658f0a3abe2a32e341 -e access_key=$ACCESS_KEY -e secret_key=$SECRET_KEY -e session_token=$SESSION_TOKEN
+      - run: ansible-playbook ./ansible/ec2deploy.yml --user ubuntu --key-file ~/.ssh/id_rsa_$HASH -e access_key=$ACCESS_KEY -e secret_key=$SECRET_KEY -e session_token=$SESSION_TOKEN
 
 workflows:
   version: 2.1
