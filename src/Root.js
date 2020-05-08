@@ -6,5 +6,5 @@ import store from './services/store';
 const Root = ({ children, initialState = {} }) => (
   <Provider store={store(initialState)}>{children}</Provider>
 );
-
+aaa
 export default Root;
