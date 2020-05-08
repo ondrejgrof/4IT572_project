@@ -17,7 +17,7 @@ jobs:
             - .
   deploy:
     docker:
-      - image: ondrejgrof/4it572:1
+      - image: ondrejgrof/python_ansible:1
     steps:
       - add_ssh_keys
       - attach_workspace:
