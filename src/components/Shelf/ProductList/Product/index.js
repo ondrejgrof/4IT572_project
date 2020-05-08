@@ -34,7 +34,7 @@ const Product = ({ product, addProduct }) => {
       data-sku={product.sku}
     >
       {product.isFreeShipping && (
-        <div className="shelf-stopper">Free shopping</div>
+        <div className="shelf-stopper">Free shopping - Sale</div>
       )}
       <Thumb
         classes="shelf-item__thumb"
