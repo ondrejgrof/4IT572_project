@@ -1,0 +1,38 @@
+vse: &vse
+  docker:
+    - image: circleci/node:8.11.3
+
+version: 2.1
+jobs:
+  build:
+    <<: *vse
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run test
+      - run: npm run build
+      - persist_to_workspace:
+         root: .
+         paths:
+            - .
+  deploy:
+    docker:
+      - image: circleci/python:3.7.7
+    steps:
+      - add_ssh_keys
+      - attach_workspace:
+          at: .
+      - run: pip install ansible boto boto3
+      - run: ansible-playbook ./ansible/ec2deploy.yml --user ubuntu --key-file ~/.ssh/id_rsa_6fb8a30c54f0c6658f0a3abe2a32e341 --extra-vars="acces_key=$ACCESS_KEY secret_key=$SECRET_KEY session_token=$SESSION_TOKEN"
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - build
+      - deploy:
+         requires:
+            - build
+         filters:
+            branches:
+               only: master
